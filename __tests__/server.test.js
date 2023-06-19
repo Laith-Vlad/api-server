@@ -1,6 +1,6 @@
 'use strict';
 const request = require('supertest');
-const app = require('../src/server');
+const app = 'https://apiserver-5ulg.onrender.com';
 
 describe('API Tests', () => {
   // Test for a bad route
