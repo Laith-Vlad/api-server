@@ -4,6 +4,8 @@
 
 ## Project Description
 
+partner name: saleh almashni
+
 this project utilizes sequalize and express to create endpoint that you can use to implemet http requasts to food and cloths it connects to postgress database and manupilates data there.
 ## Installation Instructions
 you need a .env file with port  and database url
