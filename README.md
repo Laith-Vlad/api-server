@@ -1,7 +1,7 @@
 # api-server
-## [PR](https://apiserver-5ulg.onrender.com/food)
+## [PR](https://github.com/Laith-Vlad/api-server/pull/5)
 ## [deployed link](https://apiserver-5ulg.onrender.com/food)
-## [Actions](https://apiserver-5ulg.onrender.com/food)
+## [Actions](https://github.com/Laith-Vlad/api-server/actions)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
