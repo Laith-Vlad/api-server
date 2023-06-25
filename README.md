@@ -7,7 +7,6 @@
 
 ## Project Description
 
-this project utilizes sequalize and express to create endpoint that you can use to implemet http requasts to food and recipes it connects to postgress database and manupilates data there.
 ## Installation Instructions
 you can just use npm i  to get all dependencies
 you need a .env file with port  and database url
