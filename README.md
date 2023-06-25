@@ -52,7 +52,10 @@ you can use the rest of it by adding a / and writing the id
 
 
  ## doc
-    Who was your partner?
+    Who was your partner? 
+    Saleh
     What was your key takeaway?
+    testing should be done with thoughtfulness and colabiration makes things easier 
     Share the link to your PR request.
+    
     Share the link to their PR request.
