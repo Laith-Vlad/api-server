@@ -12,7 +12,6 @@ const app = express();
 app.use(express.json());
 
 app.use('/food', foodRoutes);
-// app.use('/clothes', clothesRoutes);
 app.use('/foods', recipeRoutes);
 app.use(notFoundHandler);
 app.use(errorHandler);
