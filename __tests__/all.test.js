@@ -147,16 +147,16 @@ describe('Food Router', () => {
 });
 ////////////////////////////////////////////////////////////////////////// recipe tests //////////////////////////////////////////////////////////////////////////
 describe('Recipe Router', () => {
-    let createdRecipeId;
+    let createdRecipeId= 1;
   
     // Test case: Create a new recipe record
     it('should create a new recipe record', async () => {
       const response = await request(app)
-        .post('/rec')
+        .post('/rec/')
         .send({
           title: 'Chocolate Cake',
           description: 'A delicious chocolate cake recipe',
-          foodId: 80,
+          foodId: 20,
         });
   
       expect(response.statusCode).toBe(201);
@@ -167,7 +167,7 @@ describe('Recipe Router', () => {
           description: 'A delicious chocolate cake recipe',
           createdAt: expect.any(String),
           updatedAt: expect.any(String),
-          foodId: 80,
+          foodId: 20,
         })
       );
   
@@ -185,7 +185,7 @@ describe('Recipe Router', () => {
           description: 'A delicious chocolate cake recipe',
           createdAt: expect.any(String),
           updatedAt: expect.any(String),
-          foodId: 80,
+          foodId: 20,
         })
       );
     });
@@ -197,7 +197,7 @@ describe('Recipe Router', () => {
         .send({
           title: 'Updated Chocolate Cake',
           description: 'An updated delicious chocolate cake recipe',
-          foodId: createdRecipeId,
+          foodId: 10,
         });
   
       expect(response.statusCode).toBe(200);
@@ -208,7 +208,7 @@ describe('Recipe Router', () => {
           description: 'An updated delicious chocolate cake recipe',
           createdAt: expect.any(String),
           updatedAt: expect.any(String),
-          foodId: createdRecipeId,
+          foodId: 10,
         })
       );
     });
