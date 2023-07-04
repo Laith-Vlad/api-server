@@ -8,12 +8,12 @@ const sequelize = new Sequelize(`${URI}`, {
 });
 
 // Import models
-const Clothes = require('./clothes');
+
 const Food = require('./food');
 const Recipe = require('./recipe');
 
 // Initialize models
-Clothes.init(sequelize);
+
 Food.init(sequelize);
 Recipe.init(sequelize);
 
