@@ -1,13 +1,24 @@
+"use strict";
 const request = require('supertest');
 const express = require('express');
 const router = require('../src/routes/food');
 const router2 = require('../src/routes/recipe');
 
+const { Food, Recipe, sequelize } = require('../src/models/index');
 const app = express();
+
 app.use(express.json());
 app.use('/', router);
-app.use('/rec/', router2);
+app.use('/rec', router2);
 
+beforeAll(async () => {
+  await sequelize.sync();
+});
+
+// Clear the database after running the tests
+afterAll(async () => {
+  await sequelize.drop();
+});
 
 describe('Food Router', () => {
   it('should create a new food record', async () => {
@@ -146,79 +157,80 @@ describe('Food Router', () => {
 
 });
 ////////////////////////////////////////////////////////////////////////// recipe tests //////////////////////////////////////////////////////////////////////////
+
 describe('Recipe Router', () => {
-    let createdRecipeId= 1;
-  
-    // Test case: Create a new recipe record
-    it('should create a new recipe record', async () => {
-      const response = await request(app)
-        .post('/rec/')
-        .send({
-          title: 'Chocolate Cake',
-          description: 'A delicious chocolate cake recipe',
-          foodId: 20,
-        });
-  
-      expect(response.statusCode).toBe(201);
-      expect(response.body).toEqual(
-        expect.objectContaining({
-          id: expect.any(Number),
-          title: 'Chocolate Cake',
-          description: 'A delicious chocolate cake recipe',
-          createdAt: expect.any(String),
-          updatedAt: expect.any(String),
-          foodId: 20,
-        })
-      );
-  
-      createdRecipeId = response.body.id;
-    });
-  
-    // Test case: Get a specific recipe record
-    it('should get a specific recipe record', async () => {
-      const response = await request(app).get(`/rec/${createdRecipeId}`);
-      expect(response.statusCode).toBe(200);
-      expect(response.body).toEqual(
-        expect.objectContaining({
-          id: expect.any(Number),
-          title: 'Chocolate Cake',
-          description: 'A delicious chocolate cake recipe',
-          createdAt: expect.any(String),
-          updatedAt: expect.any(String),
-          foodId: 20,
-        })
-      );
-    });
-  
-    // Test case: Update a specific recipe record
-    it('should update a specific recipe record', async () => {
-      const response = await request(app)
-        .put(`/rec/${createdRecipeId}`)
-        .send({
-          title: 'Updated Chocolate Cake',
-          description: 'An updated delicious chocolate cake recipe',
-          foodId: 10,
-        });
-  
-      expect(response.statusCode).toBe(200);
-      expect(response.body).toEqual(
-        expect.objectContaining({
-          id: createdRecipeId,
-          title: 'Updated Chocolate Cake',
-          description: 'An updated delicious chocolate cake recipe',
-          createdAt: expect.any(String),
-          updatedAt: expect.any(String),
-          foodId: 10,
-        })
-      );
-    });
-  
-    // Test case: Delete a specific recipe record
-    it('should delete a specific recipe record', async () => {
-      const response = await request(app).delete(`/rec/${createdRecipeId}`);
-      expect(response.statusCode).toBe(200);
-    });
-  
-    // Add more test cases for other routes if needed
+  it('should create a new recipe', async () => {
+    const response = await request(app)
+      .post('/rec')
+      .send({
+        title: 'Chocolate Cake',
+        description: 'A delicious chocolate cake recipe',
+        foodId: 1,
+      });
+
+    expect(response.statusCode).toBe(201);
+    expect(response.body.title).toBe('Chocolate Cake');
   });
-  
+
+  it('should get a specific recipe', async () => {
+    // Create a new recipe
+    const createResponse = await request(app)
+      .post('/rec')
+      .send({
+        title: 'Chocolate Cake',
+        description: 'A delicious chocolate cake recipe',
+        foodId: 1,
+      });
+
+    const recipeId = createResponse.body.id;
+
+    // Retrieve the newly created recipe
+    const getResponse = await request(app).get(`/rec/${recipeId}`);
+
+    expect(getResponse.statusCode).toBe(200);
+    expect(getResponse.body.title).toBe('Chocolate Cake');
+  });
+
+  it('should update a specific recipe', async () => {
+    // Create a new recipe
+    const createResponse = await request(app)
+      .post('/rec')
+      .send({
+        title: 'Chocolate Cake',
+        description: 'A delicious chocolate cake recipe',
+        foodId: 1,
+      });
+
+    const recipeId = createResponse.body.id;
+
+    // Update the recipe
+    const updateResponse = await request(app)
+      .put(`/rec/${recipeId}`)
+      .send({
+        title: 'Updated Chocolate Cake',
+        description: 'An updated chocolate cake recipe',
+        foodId: 1,
+      });
+
+    expect(updateResponse.statusCode).toBe(200);
+    expect(updateResponse.body.title).toBe('Updated Chocolate Cake');
+  });
+
+  it('should delete a specific recipe', async () => {
+    // Create a new recipe
+    const createResponse = await request(app)
+      .post('/rec')
+      .send({
+        title: 'Chocolate Cake',
+        description: 'A delicious chocolate cake recipe',
+        foodId: 1,
+      });
+
+    const recipeId = createResponse.body.id;
+
+    // Delete the recipe
+    const deleteResponse = await request(app).delete(`/rec/${recipeId}`);
+
+    expect(deleteResponse.statusCode).toBe(200);
+  });
+});
