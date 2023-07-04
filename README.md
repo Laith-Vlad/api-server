@@ -1,7 +1,7 @@
 # api-server
-## [PR](https://apiserver-5ulg.onrender.com/food)
+## [PR](https://github.com/Laith-Vlad/api-server/pull/5)
 ## [deployed link](https://apiserver-5ulg.onrender.com/food)
-## [Actions](https://apiserver-5ulg.onrender.com/food)
+## [Actions](https://github.com/Laith-Vlad/api-server/actions)
 
 [![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
 
@@ -52,7 +52,11 @@ you can use the rest of it by adding a / and writing the id
 
 
  ## doc
-    Who was your partner?
+    Who was your partner? 
+    Saleh
     What was your key takeaway?
+    testing should be done with thoughtfulness and colabiration makes things easier 
     Share the link to your PR request.
+    https://github.com/saleh2001k/api-server/pull/5
     Share the link to their PR request.
+    https://github.com/Laith-Vlad/api-server/pull/6/

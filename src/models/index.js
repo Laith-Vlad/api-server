@@ -2,7 +2,9 @@
 require('dotenv').config();
 
 const { Sequelize } = require('sequelize');
+
 const URI = process.env.NODE_ENV === 'test' ? 'sqlite::memory:' : process.env.DBURI;
+
 
 const DATABASE_CONFIG = process.env.NODE_ENV === 'production' ? {
   dialectOptions: {
