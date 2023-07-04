@@ -13,8 +13,8 @@ app.use('/rec', router2);
 
 beforeAll(async () => {
   await sequelize.sync();
+  console.log('Database connected');
 });
-
 // Clear the database after running the tests
 afterAll(async () => {
   await sequelize.drop();
