@@ -1,11 +1,17 @@
 'use strict';
 require('dotenv').config();
 const { Sequelize } = require('sequelize');
-const URI = process.env.DBURI;
-// Configure and initialize Sequelize
-const sequelize = new Sequelize(`${URI}`, {
-  // Additional Sequelize configurations if needed
-});
+const URI = process.env.NODE_ENV === 'test' ? 'sqlite::memory' : process.env.DB_URL;
+
+const DATABASE_CONFIG = process.env.NODE_ENV === 'production' ? {
+  dialectOptions: {
+    ssl: {
+      require: true,
+      rejectUnauthorized: false,
+    }
+  }
+} : {};
+const sequelize = new Sequelize(URI, DATABASE_CONFIG);
 
 // Import models
 
