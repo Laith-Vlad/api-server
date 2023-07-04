@@ -1,6 +1,6 @@
 'use strict';
 const express = require('express');
-const bodyParser = require('body-parser');
+
 const foodRoutes = require('./routes/food');
 
 const errorHandler = require('./error-handlers/500');

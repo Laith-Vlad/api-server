@@ -1,7 +1,10 @@
 'use strict';
 require('dotenv').config();
+
 const { Sequelize } = require('sequelize');
-const URI = process.env.NODE_ENV === 'test' ? 'sqlite::memory' : process.env.DB_URL;
+
+const URI = process.env.NODE_ENV === 'test' ? 'sqlite::memory:' : process.env.DBURI;
+
 
 const DATABASE_CONFIG = process.env.NODE_ENV === 'production' ? {
   dialectOptions: {
@@ -11,6 +14,7 @@ const DATABASE_CONFIG = process.env.NODE_ENV === 'production' ? {
     }
   }
 } : {};
+
 const sequelize = new Sequelize(URI, DATABASE_CONFIG);
 
 // Import models
